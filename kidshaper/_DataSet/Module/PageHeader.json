@@ -1,0 +1,13 @@
+{
+    "dataType": "module",
+    "name": "pageHeader",
+    "version": "0.1",
+    "active": 1,
+    "include":[
+        "mainmenu"
+    ],
+    "useObj":[
+        "siteTree",
+        "userAccount"
+    ]
+}
