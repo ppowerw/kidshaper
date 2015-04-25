@@ -11,7 +11,7 @@ class Route {
     private $pathArray;
     private $actionArray; 
     private $controller = '';
-    private $SEOQuery = [];
+    private $queryString = [];
 
     public static function getInstance() {
         if (is_null(self::$instance)) {
@@ -36,13 +36,10 @@ class Route {
         $url = $urlParse['path'];
         if(strpos($url, "%3f")){
             $this->path = substr($url, 0, strpos($url, "%3f"));
-            echo PHP_EOL, "seoQuery: " , substr($url, strpos($url, "%3f")) . PHP_EOL;
-            $this->SEOQuery = $this->parseSEOQuery(substr($url, strpos($url, "%3f")+3));
+            $this->queryString = $this->parseQueryString(substr($url, strpos($url, "%3f")+3));
         }else{
             $this->path = $url;
         }
-        echo 'Path:';
-        var_dump($this->path);
         $arr = explode("%2f", substr($this->path,0,250));
         if (isset($arr[1])){
             return $arr;
@@ -78,7 +75,7 @@ class Route {
         return $this->actionArray;
     }
     
-    private function parseSEOQuery($str){
+    private function parseQueryString($str){
         $arrStr = explode("%26", $str); //%26  %3d
         foreach ($arrStr as $value) {
             $param = explode("%3d", $value);
@@ -88,8 +85,8 @@ class Route {
         return $arr;
     }
 
-    public function getSEOQuery() {
-        return $this->SEOQuery;
+    public function getQueryString() {
+        return $this->queryString;
     }
 
     public function _errorPage404() {

@@ -19,7 +19,6 @@ class Application {
         $curController = "\Controller\\" . $this->route->getController(); // Set controller
         $this->controller = new $curController;
         $this->controller->doAction();
-        var_dump(debug_backtrace());
     }
 
 }

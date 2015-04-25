@@ -21,18 +21,17 @@ class Session {
     }
 
     private function __construct() {
-        $this->checkSession(); //Check session puid
-        // 
+        $this->checkSession();
     }
 
     protected function checkSession() {
         $this->puid = $this->getGlobal('puid', 'COOKIE');
         if ($this->puid === '') {
             $this->setSession();
-            echo '>>' . $this->puid;
         } else {
             $this->setCookie('puid', $this->puid);
         }
+        return $this->puid;
     }
 
     public function setSession() {
